@@ -1,0 +1,21 @@
+INSERT INTO production.pokemon (name, phone, email) VALUES ('Pikachu', '123-456-7890', 'pikachu@example.com');
+INSERT INTO production.pokemon (name, phone, email) VALUES ('Charmander', '234-567-8901', 'charmander@example.com');
+INSERT INTO production.pokemon (name, phone, email) VALUES ('Bulbasaur', '345-678-9012', 'bulbasaur@example.com');
+INSERT INTO production.pokemon (name, phone, email) VALUES ('Squirtle', '456-789-0123', 'squirtle@example.com');
+INSERT INTO production.pokemon (name, phone, email) VALUES ('Jigglypuff', '567-890-1234', 'jigglypuff@example.com');
+INSERT INTO production.pokemon (name, phone, email) VALUES ('Meowth', '678-901-2345', 'meowth@example.com');
+INSERT INTO production.pokemon (name, phone, email) VALUES ('Psyduck', '789-012-3456', 'psyduck@example.com');
+INSERT INTO production.pokemon (name, phone, email) VALUES ('Gengar', '890-123-4567', 'gengar@example.com');
+INSERT INTO production.pokemon (name, phone, email) VALUES ('Eevee', '901-234-5678', 'eevee@example.com');
+INSERT INTO production.pokemon (name, phone, email) VALUES ('Snorlax', '012-345-6789', 'snorlax@example.com');
+INSERT INTO production.pokemon (name, phone, email) VALUES ('Lapras', '123-987-6543', 'lapras@example.com');
+INSERT INTO production.pokemon (name, phone, email) VALUES ('Dragonite', '234-876-5432', 'dragonite@example.com');
+INSERT INTO production.pokemon (name, phone, email) VALUES ('Mewtwo', '345-765-4321', 'mewtwo@example.com');
+INSERT INTO production.pokemon (name, phone, email) VALUES ('Mew', '456-654-3210', 'mew@example.com');
+INSERT INTO production.pokemon (name, phone, email) VALUES ('Vaporeon', '567-543-2109', 'vaporeon@example.com');
+INSERT INTO production.pokemon (name, phone, email) VALUES ('Jolteon', '678-432-1098', 'jolteon@example.com');
+INSERT INTO production.pokemon (name, phone, email) VALUES ('Flareon', '789-321-0987', 'flareon@example.com');
+INSERT INTO production.pokemon (name, phone, email) VALUES ('Machamp', '890-210-9876', 'machamp@example.com');
+INSERT INTO production.pokemon (name, phone, email) VALUES ('Alakazam', '901-109-8765', 'alakazam@example.com');
+INSERT INTO production.pokemon (name, phone, email) VALUES ('Gyarados', '012-098-7654', 'gyarados@example.com');
+

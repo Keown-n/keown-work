@@ -1,0 +1,38 @@
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Dependency directories
+node_modules/
+bower_components/
+
+# Environment files
+.env
+.env.*.local
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Build output
+dist/
+build/
+out/
+
+# IDE settings
+.vscode/
+.idea/
+.vs/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# OS-specific files
+*.swp
+*~

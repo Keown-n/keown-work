@@ -1,0 +1,30 @@
+name: Install SSIS Package
+
+on:
+  workflow_dispatch:
+
+env:
+  ACTIONS_STEP_DEBUG: true
+
+jobs:
+  install-ssis:
+    runs-on: self-hosted
+    environment: production
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      - name: Create SSIS Catalog Folder
+        shell: cmd
+        run: |
+          sqlcmd -S "SAMBE2025006" -E -d SSISDB -Q "IF NOT EXISTS (SELECT 1 FROM [SSISDB].[catalog].[folders] WHERE name = N'Timesheet') EXEC [SSISDB].[catalog].[create_folder] @folder_name = N'Timesheet'" -b -m 1 -r 1 -t 30
+        working-directory: ${{ github.workspace }}
+
+      - name: Deploy SSIS Package
+        shell: cmd
+        run: |
+          "C:\SSIS_Tools\SSISDeploy.exe" -s:"${{ github.workspace }}\HandsOnProjects\Timesheet\SSIS\TimeSheet_Project\bin\Development\TimeSheet_Project.ispac" -d:"catalog;/SSISDB/Timesheet/TimeSheet_Project;SAMBE2025006" -at:win
+        working-directory: ${{ github.workspace }}
