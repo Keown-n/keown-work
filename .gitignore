@@ -1,0 +1,64 @@
+# Excel files
+*.xls
+*.xlsx
+*.xlsm
+*.xlsb
+*.csv
+
+# PDFs
+*.pdf
+
+# Visual Studio files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vcxproj.*
+*.csproj.*
+*.dbmdl
+*.cache
+*.pdb
+*.obj
+*.log
+*.tlog
+*.ilk
+*.idb
+*.ipch
+*.aps
+*.ncb
+*.opensdf
+*.sdf
+*.VC.db
+.vs/
+
+# Build results
+#[Bb]in/
+[Oo]bj/
+*.exe
+*.dll
+
+# NuGet packages
+*.nupkg
+packages/
+
+# VS Code settings
+.vscode/
+
+# Other IDE/editor temp files
+*.swp
+*~
+.idea/
+*.DS_Store
+Thumbs.db
+
+# Backup or temp files
+*.bak
+*.tmp
+*.temp
+*.old
+
+# Logs
+*.log
+
+# Ignore everything in node_modules, if present
+node_modules/
