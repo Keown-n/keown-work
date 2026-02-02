@@ -3,7 +3,7 @@ import os
 
 client = OpenAI(
   base_url="https://openrouter.ai/api/v1",
-  api_key="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",
+  api_key="API KEY",
 )
 
 print("Sending request to OpenRouter...")
@@ -23,3 +23,4 @@ try:
     print("Reasoning:", getattr(response.choices[0].message, 'reasoning_details', 'No reasoning details'))
 except Exception as e:
     print("Error:", e)
+
