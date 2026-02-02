@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Attrition Risk Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Employee Attrition Risk Dashboard</h1>
+            <p>Predict employee turnover and discover retention strategies.</p>
+        </header>
+
+        <main>
+            <form id="predictionForm">
+                <div class="form-grid">
+                    <!-- Numerical Features -->
+                    <div class="form-group">
+                        <label for="Age">Age</label>
+                        <input type="number" id="Age" name="Age" required min="18" max="100" value="30">
+                    </div>
+                    <div class="form-group">
+                        <label for="DailyRate">Daily Rate</label>
+                        <input type="number" id="DailyRate" name="DailyRate" required min="0" value="800">
+                    </div>
+                    <div class="form-group">
+                        <label for="DistanceFromHome">Distance From Home (km)</label>
+                        <input type="number" id="DistanceFromHome" name="DistanceFromHome" required min="0" value="5">
+                    </div>
+                    <div class="form-group">
+                        <label for="EnvironmentSatisfaction">Env. Satisfaction (1-4)</label>
+                        <input type="number" id="EnvironmentSatisfaction" name="EnvironmentSatisfaction" required
+                            min="1" max="4" value="3">
+                    </div>
+                    <div class="form-group">
+                        <label for="JobInvolvement">Job Involvement (1-4)</label>
+                        <input type="number" id="JobInvolvement" name="JobInvolvement" required min="1" max="4"
+                            value="3">
+                    </div>
+                    <div class="form-group">
+                        <label for="JobLevel">Job Level (1-5)</label>
+                        <input type="number" id="JobLevel" name="JobLevel" required min="1" max="5" value="2">
+                    </div>
+                    <div class="form-group">
+                        <label for="JobSatisfaction">Job Satisfaction (1-4)</label>
+                        <input type="number" id="JobSatisfaction" name="JobSatisfaction" required min="1" max="4"
+                            value="3">
+                    </div>
+                    <div class="form-group">
+                        <label for="MonthlyIncome">Monthly Income</label>
+                        <input type="number" id="MonthlyIncome" name="MonthlyIncome" required min="0" value="5000">
+                    </div>
+                    <div class="form-group">
+                        <label for="StockOptionLevel">Stock Option Level (0-3)</label>
+                        <input type="number" id="StockOptionLevel" name="StockOptionLevel" required min="0" max="3"
+                            value="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="TotalWorkingYears">Total Working Years</label>
+                        <input type="number" id="TotalWorkingYears" name="TotalWorkingYears" required min="0"
+                            value="10">
+                    </div>
+                    <div class="form-group">
+                        <label for="TrainingTimesLastYear">Training Times Last Year</label>
+                        <input type="number" id="TrainingTimesLastYear" name="TrainingTimesLastYear" required min="0"
+                            value="3">
+                    </div>
+                    <div class="form-group">
+                        <label for="WorkLifeBalance">Work Life Balance (1-4)</label>
+                        <input type="number" id="WorkLifeBalance" name="WorkLifeBalance" required min="1" max="4"
+                            value="3">
+                    </div>
+                    <div class="form-group">
+                        <label for="YearsAtCompany">Years At Company</label>
+                        <input type="number" id="YearsAtCompany" name="YearsAtCompany" required min="0" value="5">
+                    </div>
+                    <div class="form-group">
+                        <label for="YearsInCurrentRole">Years In Current Role</label>
+                        <input type="number" id="YearsInCurrentRole" name="YearsInCurrentRole" required min="0"
+                            value="2">
+                    </div>
+                    <div class="form-group">
+                        <label for="YearsWithCurrManager">Years With Curr Manager</label>
+                        <input type="number" id="YearsWithCurrManager" name="YearsWithCurrManager" required min="0"
+                            value="2">
+                    </div>
+
+                    <!-- Categorical Features -->
+                    {% for feature, options in categorical_options.items() %}
+                    <div class="form-group">
+                        <label for="{{ feature }}">{{ feature }}</label>
+                        <select id="{{ feature }}" name="{{ feature }}" required>
+                            {% for option in options %}
+                            <option value="{{ option }}">{{ option }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <button type="submit" id="predictBtn">Analyze Risk</button>
+            </form>
+
+            <div id="result" class="result-card hidden">
+                <h2>Analysis Result</h2>
+                <div class="result-grid">
+                    <div class="result-item">
+                        <span class="label">Risk Level</span>
+                        <span id="riskLevel" class="value"></span>
+                    </div>
+                    <div class="result-item">
+                        <span class="label">Probability</span>
+                        <span id="probability" class="value"></span>
+                    </div>
+                </div>
+                <div class="strategies-section">
+                    <h3>Recommended Strategies</h3>
+                    <ul id="strategiesList"></ul>
+                </div>
+
+                <div class="ai-section">
+                    <h3>🤖 AI Consultant Analysis</h3>
+                    <div id="aiAnalysis" class="ai-content"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+
+</html>
