@@ -1,0 +1,29 @@
+name: Teams Pull Request Notification
+on:
+  pull_request:
+    types: [opened, reopened]
+
+jobs:
+  notify-teams:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: neonidian/teams-notify-build-status@v3
+        with:
+          webhookUrl:  # Send notifications to multiple MS Teams channels
+            ${{ secrets.WEBHOOK_URL }}
+          title: Keown Nadioo Pull Request  # Title header
+          titleBackgroundColor: green  # Background color
+          message: |
+           message: |
+            **A pull request 🚀**
+             1.  🏷 **Title:** ${{ github.event.pull_request.title }}
+             2. 📝 **Description:** ${{ github.event.pull_request.body || 'No description provided' }}
+             3. 👤 **Author:** ${{ github.actor }}
+             4. 🔗 [View PR](${{ github.event.pull_request.html_url }})
+             5. 🌿 **Branch:** ${{ github.event.pull_request.head.ref }}
+
+          
+        env:  
+          SHOULD_DISPLAY_ACTOR_LABEL: true
+          SHOULD_DISPLAY_VIEW_RUN_BUTTON: true
+          SHOULD_DISPLAY_VIEW_COMMIT_BUTTON: true

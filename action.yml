@@ -1,0 +1,80 @@
+name: "Testing Templating"
+description: "Testing SQL Server setup and deployment"
+inputs:
+  server:
+    description: 'SQL Server address'
+    required: true
+  db_user:
+    description: 'Database username'
+    required: true
+  db_password:
+    description: 'Database password'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Testing
+      shell: bash
+      run: echo "Hello from my custom GitHub Action"
+
+    - name: Add Microsoft repository for SQL Server tools
+      shell: bash
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y curl
+        curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+        curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
+        sudo apt-get update
+
+    - name: Install SQL Server client
+      shell: bash
+      run: sudo apt-get install -y mssql-tools unixodbc-dev
+
+    - name: Add SQL Server tools to PATH
+      shell: bash
+      run: echo "/opt/mssql-tools/bin" >> $GITHUB_PATH
+
+    - name: Test Connection to SQL Server
+      shell: bash
+      env:
+        SERVER: ${{ inputs.server }}
+        DB_USER: ${{ inputs.db_user }}
+        DB_PASSWORD: ${{ inputs.db_password }}
+      run: |
+        sqlcmd -S "$SERVER" -U "$DB_USER" -P "$DB_PASSWORD" -Q "SELECT @@VERSION" || echo "Connection failed: check server, user, or password"
+
+    - name: Create Database
+      shell: bash
+      env:
+        SERVER: ${{ inputs.server }}
+        DB_USER: ${{ inputs.db_user }}
+        DB_PASSWORD: ${{ inputs.db_password }}
+      run: |
+        sqlcmd -S "$SERVER" -U "$DB_USER" -P "$DB_PASSWORD" -d "master" -i "DatabaseAutomation/1_CreateDatabase.sql"
+
+    - name: Create Table
+      shell: bash
+      env:
+        SERVER: ${{ inputs.server }}
+        DB_USER: ${{ inputs.db_user }}
+        DB_PASSWORD: ${{ inputs.db_password }}
+      run: |
+        sqlcmd -S "$SERVER" -U "$DB_USER" -P "$DB_PASSWORD" -d "master" -i "DatabaseAutomation/2_CreateTable.sql"
+
+    - name: Create Stored Procedure
+      shell: bash
+      env:
+        SERVER: ${{ inputs.server }}
+        DB_USER: ${{ inputs.db_user }}
+        DB_PASSWORD: ${{ inputs.db_password }}
+      run: |
+        sqlcmd -S "$SERVER" -U "$DB_USER" -P "$DB_PASSWORD" -d "master" -i "DatabaseAutomation/3_StoredProcedure.sql"
+
+    - name: Execute Stored Procedure
+      shell: bash
+      env:
+        SERVER: ${{ inputs.server }}
+        DB_USER: ${{ inputs.db_user }}
+        DB_PASSWORD: ${{ inputs.db_password }}
+      run: |
+        sqlcmd -S "$SERVER" -U "$DB_USER" -P "$DB_PASSWORD" -d "master" -i "DatabaseAutomation/4_ExecuteStoredProcedure.sql"
